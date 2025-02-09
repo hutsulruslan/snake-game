@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
-    private class Tile{
+    private static class Tile{
         int x;
         int y;
 
@@ -47,10 +47,10 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         addKeyListener(this);
         setFocusable(true);
 
-        snakeHead = new Tile(5,5);
+        snakeHead = new Tile(5, 5);
         snakeBody = new ArrayList<>();
 
-        food = new Tile(10,10);
+        food = new Tile(10, 10);
         random = new Random();
         placeFood();
 
@@ -67,25 +67,17 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     }
 
     public void draw(Graphics g) {
-//        //Grid
-//        for (int i = 0; i < boardWidth / tileSize; i++) {
-//            g.drawLine(i * tileSize, 0, i * tileSize, boardHeight);
-//            g.drawLine(0, i * tileSize, boardWidth, i * tileSize);
-//        }
 
         //Food
         g.setColor(Color.RED);
-        //g.fillRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize);
         g.fill3DRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize, true);
 
         //Snake Head
         g.setColor(Color.GREEN);
-        //g.fillRect(snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize);
         g.fill3DRect(snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize, true);
 
         //Snake Body
         for (Tile snakePart : snakeBody) {
-//          g.fillRect(snakePart.x * tileSize, snakePart.y * tileSize, tileSize, tileSize);
             g.fill3DRect(snakePart.x * tileSize, snakePart.y * tileSize, tileSize, tileSize, true);
         }
 
@@ -93,10 +85,10 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         g.setFont(new Font("Arial", Font.BOLD, 16));
         if (gameOver) {
             g.setColor(Color.RED);
-            g.drawString("Game Over: " + String.valueOf(snakeBody.size()), boardWidth / 2, boardHeight / 2);
+            g.drawString("Game Over: " + snakeBody.size(), boardWidth / 2, boardHeight / 2);
         }
         else {
-            g.drawString("Score: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+            g.drawString("Score: " + snakeBody.size(), tileSize - 16, tileSize);
         }
     }
 
